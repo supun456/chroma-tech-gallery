@@ -1,12 +1,12 @@
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
-type Theme = 'cyberpunk' | 'matrix' | 'solarized' | 'quantum';
+type Theme = 'cyberpunk' | 'matrix' | 'solarized' | 'quantum' | 'nebula';
 
 interface ThemeContextType {
   theme: Theme;
   setTheme: (theme: Theme) => void;
-  themes: { name: Theme; label: string; colors: { primary: string; secondary: string; accent: string } }[];
+  themes: { name: Theme; label: string; colors: { primary: string; secondary: string; accent: string; tertiary?: string; quaternary?: string } }[];
 }
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
@@ -31,6 +31,17 @@ export const themes = [
     name: 'quantum' as Theme,
     label: 'Quantum',
     colors: { primary: '#ff66c4', secondary: '#22d3ee', accent: '#a855f7' }
+  },
+  {
+    name: 'nebula' as Theme,
+    label: 'Nebula',
+    colors: { 
+      primary: '#ff6b6b', 
+      secondary: '#4ecdc4', 
+      accent: '#45b7d1',
+      tertiary: '#96ceb4',
+      quaternary: '#ffeaa7'
+    }
   }
 ];
 

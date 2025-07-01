@@ -3,11 +3,15 @@ import React, { useState, useEffect } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import { Github, Linkedin, Mail, Download } from 'lucide-react';
 import { Button } from './ui/button';
+import { useTheme } from '../contexts/ThemeContext';
+import { useInteractions } from '../hooks/useInteractions';
 
 const Hero: React.FC = () => {
   const [displayText, setDisplayText] = useState('');
   const [currentIndex, setCurrentIndex] = useState(0);
   const controls = useAnimation();
+  const { theme } = useTheme();
+  const { scrollProgress } = useInteractions();
   
   const fullText = "I turn code into products.";
   
@@ -37,11 +41,13 @@ const Hero: React.FC = () => {
           transition={{ duration: 0.8 }}
           className="mb-8"
         >
-          <div className="text-sm font-mono text-white/60 mb-4 uppercase tracking-widest">
+          <div className="text-sm font-mono text-white/60 mb-4 uppercase tracking-widest scroll-color-shift">
             Welcome to the matrix
           </div>
           
-          <h1 className="text-6xl md:text-8xl font-bold mb-6 bg-gradient-to-r from-white via-white to-white/60 bg-clip-text text-transparent">
+          <h1 className={`text-6xl md:text-8xl font-bold mb-6 bg-gradient-to-r from-white via-white to-white/60 bg-clip-text text-transparent ${
+            theme === 'nebula' ? 'multi-color-text' : ''
+          }`}>
             John Doe
           </h1>
           
@@ -57,9 +63,9 @@ const Hero: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="mb-12"
+          className="mb-12 scroll-reveal"
         >
-          <p className="text-lg text-white/80 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-lg text-white/80 max-w-2xl mx-auto leading-relaxed scroll-color-shift">
             Full-stack developer crafting digital experiences with cutting-edge technologies. 
             Specializing in React, Node.js, and cloud architectures.
           </p>
@@ -69,7 +75,7 @@ const Hero: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-12"
+          className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-12 scroll-reveal"
         >
           <Button className="neon-button px-8 py-3 text-lg">
             <Download className="mr-2 h-5 w-5" />
@@ -81,10 +87,12 @@ const Hero: React.FC = () => {
               <motion.a
                 key={social.label}
                 href={social.href}
-                className="p-3 rounded-full border-2 border-transparent transition-all duration-300 hover:scale-110"
+                className="p-3 rounded-full border-2 border-transparent transition-all duration-300 hover:scale-110 click-ripple"
                 style={{ borderColor: 'var(--neon-primary)' }}
                 whileHover={{ 
-                  boxShadow: '0 0 20px var(--neon-primary)',
+                  boxShadow: theme === 'nebula' ? 
+                    '0 0 20px var(--neon-primary), 0 0 30px var(--neon-secondary)' :
+                    '0 0 20px var(--neon-primary)',
                   backgroundColor: 'rgba(0, 255, 255, 0.1)'
                 }}
                 whileTap={{ scale: 0.9 }}
@@ -112,20 +120,23 @@ const Hero: React.FC = () => {
         </motion.div>
       </div>
 
-      {/* Floating elements */}
+      {/* Floating elements with enhanced effects for Nebula theme */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(20)].map((_, i) => (
+        {[...Array(theme === 'nebula' ? 30 : 20)].map((_, i) => (
           <motion.div
             key={i}
             className="absolute w-1 h-1 rounded-full"
             style={{ 
-              backgroundColor: 'var(--neon-primary)',
+              backgroundColor: theme === 'nebula' ? 
+                `var(--neon-${['primary', 'secondary', 'accent', 'tertiary', 'quaternary'][i % 5]})` :
+                'var(--neon-primary)',
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`
             }}
             animate={{
               y: [0, -30, 0],
               opacity: [0.3, 1, 0.3],
+              scale: theme === 'nebula' ? [1, 1.5, 1] : [1, 1, 1],
             }}
             transition={{
               duration: 3 + Math.random() * 2,
@@ -135,6 +146,24 @@ const Hero: React.FC = () => {
           />
         ))}
       </div>
+
+      {/* Scroll progress indicator for Nebula theme */}
+      {theme === 'nebula' && (
+        <div className="fixed top-0 left-0 w-full h-1 bg-black/20 z-50">
+          <div 
+            className="h-full transition-all duration-300"
+            style={{
+              width: `${scrollProgress}%`,
+              background: `linear-gradient(90deg, 
+                var(--neon-primary) 0%, 
+                var(--neon-secondary) 25%, 
+                var(--neon-accent) 50%, 
+                var(--neon-tertiary) 75%, 
+                var(--neon-quaternary) 100%)`
+            }}
+          />
+        </div>
+      )}
     </section>
   );
 };
