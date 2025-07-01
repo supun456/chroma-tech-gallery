@@ -4,38 +4,38 @@ import { motion } from 'framer-motion';
 
 const About: React.FC = () => {
   const skills = [
-    { name: 'React/Next.js', level: 95 },
-    { name: 'TypeScript', level: 90 },
-    { name: 'Node.js', level: 85 },
-    { name: 'Python', level: 80 },
-    { name: 'AWS/Cloud', level: 75 },
-    { name: 'MongoDB', level: 85 }
+    { name: 'Data Analysis', level: 95 },
+    { name: 'Forecasting Models', level: 90 },
+    { name: 'MongoDB', level: 85 },
+    { name: 'MS Office', level: 90 },
+    { name: 'Data Governance', level: 80 },
+    { name: 'Backend Development', level: 85 }
   ];
 
   const timeline = [
     {
-      year: '2024',
-      title: 'Senior Full Stack Developer',
-      company: 'TechCorp Inc.',
-      description: 'Leading development of scalable web applications'
+      year: '2024-2025',
+      title: 'Associate Software Engineer',
+      company: 'Velou, Engineering Center',
+      description: 'Transitioned into software engineering role, contributing to backend development projects. Leveraged data expertise to build more efficient and scalable systems.'
     },
     {
-      year: '2022',
-      title: 'Full Stack Developer',
-      company: 'StartupXYZ',
-      description: 'Built customer-facing applications from ground up'
+      year: '2023-2024',
+      title: 'Lead - Data Excellence Team',
+      company: 'Velou, Engineering Center',
+      description: 'Led the Data Excellence team, overseeing data strategy and governance initiatives. Streamlined data workflows and ensured data integrity across all business functions.'
     },
     {
-      year: '2020',
-      title: 'Frontend Developer',  
-      company: 'WebAgency',
-      description: 'Created responsive websites and web applications'
+      year: '2022-2023',
+      title: 'Senior Data Excellence Analyst',
+      company: 'Velou, Engineering Center',
+      description: 'Trained cross-functional teams on data best practices. Championed data literacy programs and created forecasting models that improved prediction accuracy by 35%.'
     },
     {
-      year: '2019',
-      title: 'Computer Science Graduate',
-      company: 'University',
-      description: 'Bachelor\'s degree in Computer Science'
+      year: '2021-2022',
+      title: 'Data Excellence Analyst',
+      company: 'Velou, Engineering Center',
+      description: 'Transformed complex data into actionable insights, supporting faster decisions. Utilized advanced analytics tools to improve data interpretation and reporting quality.'
     }
   ];
 
@@ -52,8 +52,10 @@ const About: React.FC = () => {
             About Me
           </h2>
           <p className="text-xl text-white/80 max-w-3xl mx-auto">
-            Passionate developer with 5+ years of experience building scalable web applications
-            and leading development teams. I love turning complex problems into simple, beautiful solutions.
+            Results-driven data and software professional with over 4 years of experience at Velou, 
+            progressing from Data Excellence Analyst to Associate Software Engineer. Skilled in data analytics, 
+            team leadership, and backend development, with a proven ability to transform complex data into 
+            actionable strategies.
           </p>
         </motion.div>
 
@@ -94,7 +96,7 @@ const About: React.FC = () => {
             transition={{ duration: 0.8 }}
             className="glass-card p-8 rounded-lg"
           >
-            <h3 className="text-2xl font-bold mb-8 glow-text">Journey</h3>
+            <h3 className="text-2xl font-bold mb-8 glow-text">Career Journey</h3>
             <div className="relative">
               <div 
                 className="absolute left-4 top-0 bottom-0 w-0.5"

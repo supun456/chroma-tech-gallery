@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef } from 'react';
 import { useTheme } from '../contexts/ThemeContext';
 
@@ -58,6 +57,10 @@ const ParticleBackground: React.FC = () => {
           const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#ffeaa7'];
           return colors[index % colors.length];
         }
+        case 'aurora': {
+          const colors = ['#4F46E5', '#7C3AED', '#EC4899', '#3B82F6', '#8B5CF6'];
+          return colors[index % colors.length];
+        }
         default: return '#00FFFF';
       }
     }
@@ -72,8 +75,8 @@ const ParticleBackground: React.FC = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       
       particles.forEach((particle, i) => {
-        // Mouse attraction effect for Nebula theme
-        if (theme === 'nebula') {
+        // Mouse attraction effect for Nebula and Aurora themes
+        if (theme === 'nebula' || theme === 'aurora') {
           const dx = mouseRef.current.x - particle.x;
           const dy = mouseRef.current.y - particle.y;
           const distance = Math.sqrt(dx * dx + dy * dy);
@@ -114,8 +117,8 @@ const ParticleBackground: React.FC = () => {
         ctx.globalAlpha = particle.opacity;
         ctx.fill();
 
-        // Enhanced glow effect for Nebula theme
-        if (theme === 'nebula') {
+        // Enhanced glow effect for Nebula and Aurora themes
+        if (theme === 'nebula' || theme === 'aurora') {
           ctx.beginPath();
           ctx.arc(particle.x, particle.y, particle.size * 2, 0, Math.PI * 2);
           ctx.fillStyle = particle.color;
@@ -173,7 +176,7 @@ const ParticleBackground: React.FC = () => {
     <canvas
       ref={canvasRef}
       className="fixed inset-0 pointer-events-none z-0"
-      style={{ opacity: theme === 'nebula' ? 0.4 : 0.3 }}
+      style={{ opacity: theme === 'nebula' || theme === 'aurora' ? 0.4 : 0.3 }}
     />
   );
 };

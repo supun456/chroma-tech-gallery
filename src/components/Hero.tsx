@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import { Github, Linkedin, Mail, Download } from 'lucide-react';
@@ -13,7 +12,7 @@ const Hero: React.FC = () => {
   const { theme } = useTheme();
   const { scrollProgress } = useInteractions();
   
-  const fullText = "I turn code into products.";
+  const fullText = "$ Data Analyst";
   
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -29,7 +28,7 @@ const Hero: React.FC = () => {
   const socialLinks = [
     { icon: Github, href: '#', label: 'GitHub' },
     { icon: Linkedin, href: '#', label: 'LinkedIn' },
-    { icon: Mail, href: '#', label: 'Email' }
+    { icon: Mail, href: 'mailto:supun6623@gmail.com', label: 'Email' }
   ];
 
   return (
@@ -42,13 +41,13 @@ const Hero: React.FC = () => {
           className="mb-8"
         >
           <div className="text-sm font-mono text-white/60 mb-4 uppercase tracking-widest scroll-color-shift">
-            Welcome to the matrix
+            Portfolio Terminal
           </div>
           
           <h1 className={`text-6xl md:text-8xl font-bold mb-6 bg-gradient-to-r from-white via-white to-white/60 bg-clip-text text-transparent ${
-            theme === 'nebula' ? 'multi-color-text' : ''
+            theme === 'nebula' || theme === 'aurora' ? 'multi-color-text' : ''
           }`}>
-            John Doe
+            Supun Perera
           </h1>
           
           <div className="text-xl md:text-2xl font-mono mb-8 h-8">
@@ -66,8 +65,9 @@ const Hero: React.FC = () => {
           className="mb-12 scroll-reveal"
         >
           <p className="text-lg text-white/80 max-w-2xl mx-auto leading-relaxed scroll-color-shift">
-            Full-stack developer crafting digital experiences with cutting-edge technologies. 
-            Specializing in React, Node.js, and cloud architectures.
+            Associate Software Engineer with 4+ years of experience in data analytics 
+            and backend development. Specialized in transforming complex data into 
+            scalable tech solutions.
           </p>
         </motion.div>
 
@@ -90,7 +90,7 @@ const Hero: React.FC = () => {
                 className="p-3 rounded-full border-2 border-transparent transition-all duration-300 hover:scale-110 click-ripple"
                 style={{ borderColor: 'var(--neon-primary)' }}
                 whileHover={{ 
-                  boxShadow: theme === 'nebula' ? 
+                  boxShadow: theme === 'nebula' || theme === 'aurora' ? 
                     '0 0 20px var(--neon-primary), 0 0 30px var(--neon-secondary)' :
                     '0 0 20px var(--neon-primary)',
                   backgroundColor: 'rgba(0, 255, 255, 0.1)'
@@ -147,8 +147,8 @@ const Hero: React.FC = () => {
         ))}
       </div>
 
-      {/* Scroll progress indicator for Nebula theme */}
-      {theme === 'nebula' && (
+      {/* Scroll progress indicator for Nebula and Aurora themes */}
+      {(theme === 'nebula' || theme === 'aurora') && (
         <div className="fixed top-0 left-0 w-full h-1 bg-black/20 z-50">
           <div 
             className="h-full transition-all duration-300"

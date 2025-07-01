@@ -1,7 +1,7 @@
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
-type Theme = 'cyberpunk' | 'matrix' | 'solarized' | 'quantum' | 'nebula';
+type Theme = 'cyberpunk' | 'matrix' | 'solarized' | 'quantum' | 'nebula' | 'aurora';
 
 interface ThemeContextType {
   theme: Theme;
@@ -41,6 +41,17 @@ export const themes = [
       accent: '#45b7d1',
       tertiary: '#96ceb4',
       quaternary: '#ffeaa7'
+    }
+  },
+  {
+    name: 'aurora' as Theme,
+    label: 'Aurora',
+    colors: {
+      primary: '#4F46E5',
+      secondary: '#7C3AED', 
+      accent: '#EC4899',
+      tertiary: '#3B82F6',
+      quaternary: '#8B5CF6'
     }
   }
 ];

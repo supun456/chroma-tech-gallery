@@ -1,4 +1,3 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -85,6 +84,16 @@
     --background: 0 0% 3%;
   }
 
+  /* Aurora Theme - Blue to Purple to Pink gradient */
+  [data-theme="aurora"] {
+    --neon-primary: #4F46E5;
+    --neon-secondary: #7C3AED;
+    --neon-accent: #EC4899;
+    --neon-tertiary: #3B82F6;
+    --neon-quaternary: #8B5CF6;
+    --background: 0 0% 2%;
+  }
+
   * {
     @apply border-border;
   }
@@ -98,6 +107,11 @@
   /* Nebula specific dark background */
   [data-theme="nebula"] body {
     background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 25%, #16213e 50%, #0f0f23 75%, #000000 100%);
+  }
+
+  /* Aurora specific gradient background */
+  [data-theme="aurora"] body {
+    background: linear-gradient(135deg, #030014 0%, #1a0d2e 25%, #2d1b69 50%, #0f0f23 75%, #000000 100%);
   }
 
   /* Custom scrollbar */
@@ -143,6 +157,14 @@
 
   /* Nebula multi-color glow effects */
   [data-theme="nebula"] .glass-card:hover {
+    box-shadow: 
+      0 0 10px var(--neon-primary),
+      0 0 20px var(--neon-secondary),
+      0 0 30px var(--neon-accent);
+  }
+
+  /* Aurora multi-color glow effects */
+  [data-theme="aurora"] .glass-card:hover {
     box-shadow: 
       0 0 10px var(--neon-primary),
       0 0 20px var(--neon-secondary),
@@ -273,8 +295,36 @@
       rgba(69, 183, 209, 0.1));
   }
 
+  /* Aurora theme multi-color button */
+  [data-theme="aurora"] .neon-button:hover {
+    box-shadow: 
+      0 0 5px var(--neon-primary),
+      0 0 15px var(--neon-secondary),
+      0 0 25px var(--neon-accent),
+      0 0 35px var(--neon-tertiary);
+    background: linear-gradient(45deg, 
+      rgba(79, 70, 229, 0.1), 
+      rgba(124, 58, 237, 0.1), 
+      rgba(236, 72, 153, 0.1));
+  }
+
   /* Multi-color text effect for Nebula theme */
   [data-theme="nebula"] .multi-color-text {
+    background: linear-gradient(45deg, 
+      var(--neon-primary), 
+      var(--neon-secondary), 
+      var(--neon-accent), 
+      var(--neon-tertiary), 
+      var(--neon-quaternary));
+    background-size: 400% 400%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradient-shift 3s ease infinite;
+  }
+
+  /* Aurora multi-color text effect */
+  [data-theme="aurora"] .multi-color-text {
     background: linear-gradient(45deg, 
       var(--neon-primary), 
       var(--neon-secondary), 
@@ -316,6 +366,26 @@
   }
 
   [data-theme="nebula"] .scroll-color-shift.scrolled-100 {
+    color: var(--neon-quaternary);
+  }
+
+  [data-theme="aurora"] .scroll-color-shift {
+    color: var(--neon-primary);
+  }
+
+  [data-theme="aurora"] .scroll-color-shift.scrolled-25 {
+    color: var(--neon-secondary);
+  }
+
+  [data-theme="aurora"] .scroll-color-shift.scrolled-50 {
+    color: var(--neon-accent);
+  }
+
+  [data-theme="aurora"] .scroll-color-shift.scrolled-75 {
+    color: var(--neon-tertiary);
+  }
+
+  [data-theme="aurora"] .scroll-color-shift.scrolled-100 {
     color: var(--neon-quaternary);
   }
 }

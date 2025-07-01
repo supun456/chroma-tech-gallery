@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from 'react';
 import { useTheme } from '../contexts/ThemeContext';
 
@@ -14,8 +13,8 @@ export const useInteractions = () => {
       const progress = (scrollTop / docHeight) * 100;
       setScrollProgress(progress);
 
-      // Add scroll-based classes for Nebula theme
-      if (theme === 'nebula') {
+      // Add scroll-based classes for Nebula and Aurora themes
+      if (theme === 'nebula' || theme === 'aurora') {
         const elements = document.querySelectorAll('.scroll-color-shift');
         elements.forEach((element) => {
           element.classList.remove('scrolled-25', 'scrolled-50', 'scrolled-75', 'scrolled-100');
@@ -47,8 +46,8 @@ export const useInteractions = () => {
     const handleClick = (e: MouseEvent) => {
       setClickPosition({ x: e.clientX, y: e.clientY });
       
-      // Create ripple effect for Nebula theme
-      if (theme === 'nebula') {
+      // Create ripple effect for Nebula and Aurora themes
+      if (theme === 'nebula' || theme === 'aurora') {
         const ripple = document.createElement('div');
         ripple.className = 'fixed pointer-events-none z-50 rounded-full animate-ping';
         ripple.style.left = `${e.clientX - 10}px`;
