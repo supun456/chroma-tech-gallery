@@ -1,105 +1,182 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
-
+/* Theme definitions with CSS variables for dynamic switching */
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
-
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-
-    --radius: 0.5rem;
-
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
-
-  .dark {
-    --background: 222.2 84% 4.9%;
+    --background: 0 0% 0%;
     --foreground: 210 40% 98%;
-
     --card: 222.2 84% 4.9%;
     --card-foreground: 210 40% 98%;
-
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
-
     --primary: 210 40% 98%;
     --primary-foreground: 222.2 47.4% 11.2%;
-
     --secondary: 217.2 32.6% 17.5%;
     --secondary-foreground: 210 40% 98%;
-
     --muted: 217.2 32.6% 17.5%;
     --muted-foreground: 215 20.2% 65.1%;
-
     --accent: 217.2 32.6% 17.5%;
     --accent-foreground: 210 40% 98%;
-
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
-
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --radius: 0.5rem;
+    
+    /* Default Cyberpunk Theme */
+    --neon-primary: #00FFFF;
+    --neon-secondary: #7f5af0;
+    --neon-accent: #ff00ff;
   }
-}
 
-@layer base {
+  /* Cyberpunk Theme */
+  [data-theme="cyberpunk"] {
+    --neon-primary: #00FFFF;
+    --neon-secondary: #7f5af0;
+    --neon-accent: #ff00ff;
+    --background: 0 0% 0%;
+  }
+
+  /* Matrix Theme */
+  [data-theme="matrix"] {
+    --neon-primary: #00ff00;
+    --neon-secondary: #003300;
+    --neon-accent: #33ff33;
+    --background: 0 0% 0%;
+  }
+
+  /* Solarized Theme */
+  [data-theme="solarized"] {
+    --neon-primary: #cb4b16;
+    --neon-secondary: #268bd2;
+    --neon-accent: #b58900;
+    --background: 192 100% 11%;
+  }
+
+  /* Quantum Theme */
+  [data-theme="quantum"] {
+    --neon-primary: #ff66c4;
+    --neon-secondary: #22d3ee;
+    --neon-accent: #a855f7;
+    --background: 222 47% 11%;
+  }
+
   * {
     @apply border-border;
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-mono;
+    background: linear-gradient(135deg, hsl(var(--background)) 0%, hsl(222 47% 5%) 100%);
+    min-height: 100vh;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--background));
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--neon-primary);
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--neon-secondary);
+  }
+
+  /* Glow utilities */
+  .glow-text {
+    text-shadow: 0 0 10px var(--neon-primary), 0 0 20px var(--neon-primary), 0 0 30px var(--neon-primary);
+  }
+
+  .glow-border {
+    border: 1px solid var(--neon-primary);
+    box-shadow: 0 0 10px var(--neon-primary), inset 0 0 10px rgba(0, 255, 255, 0.1);
+  }
+
+  .glass-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  /* Typing effect */
+  .typing-text {
+    overflow: hidden;
+    border-right: 2px solid var(--neon-primary);
+    white-space: nowrap;
+    margin: 0 auto;
+    animation: typing 3.5s steps(40, end), blink 1s infinite;
+  }
+
+  /* Particles background */
+  .particles-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  .particle {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: var(--neon-primary);
+    border-radius: 50%;
+    animation: particles 15s linear infinite;
+  }
+}
+
+/* Theme transition animations */
+@layer components {
+  .theme-transition {
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .neon-button {
+    @apply relative px-6 py-3 border-2 border-transparent bg-transparent text-white font-semibold tracking-wide uppercase transition-all duration-300;
+    border-color: var(--neon-primary);
+    color: var(--neon-primary);
+    background: linear-gradient(45deg, transparent, transparent);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .neon-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, var(--neon-primary), transparent);
+    transition: left 0.5s;
+    opacity: 0.3;
+  }
+
+  .neon-button:hover::before {
+    left: 100%;
+  }
+
+  .neon-button:hover {
+    box-shadow: 
+      0 0 5px var(--neon-primary),
+      0 0 25px var(--neon-primary),
+      0 0 50px var(--neon-primary),
+      0 0 100px var(--neon-primary);
+    color: white;
+    background-color: rgba(0, 255, 255, 0.1);
   }
 }

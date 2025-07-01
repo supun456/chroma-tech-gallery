@@ -1,0 +1,57 @@
+
+import React, { createContext, useContext, useState, useEffect } from 'react';
+
+type Theme = 'cyberpunk' | 'matrix' | 'solarized' | 'quantum';
+
+interface ThemeContextType {
+  theme: Theme;
+  setTheme: (theme: Theme) => void;
+  themes: { name: Theme; label: string; colors: { primary: string; secondary: string; accent: string } }[];
+}
+
+const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
+
+export const themes = [
+  {
+    name: 'cyberpunk' as Theme,
+    label: 'Cyberpunk',
+    colors: { primary: '#00FFFF', secondary: '#7f5af0', accent: '#ff00ff' }
+  },
+  {
+    name: 'matrix' as Theme,
+    label: 'Matrix',
+    colors: { primary: '#00ff00', secondary: '#003300', accent: '#33ff33' }
+  },
+  {
+    name: 'solarized' as Theme,
+    label: 'Solarized',
+    colors: { primary: '#cb4b16', secondary: '#268bd2', accent: '#b58900' }
+  },
+  {
+    name: 'quantum' as Theme,
+    label: 'Quantum',
+    colors: { primary: '#ff66c4', secondary: '#22d3ee', accent: '#a855f7' }
+  }
+];
+
+export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const [theme, setTheme] = useState<Theme>('cyberpunk');
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+  }, [theme]);
+
+  return (
+    <ThemeContext.Provider value={{ theme, setTheme, themes }}>
+      {children}
+    </ThemeContext.Provider>
+  );
+};
+
+export const useTheme = () => {
+  const context = useContext(ThemeContext);
+  if (context === undefined) {
+    throw new Error('useTheme must be used within a ThemeProvider');
+  }
+  return context;
+};
